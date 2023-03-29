@@ -5,8 +5,7 @@
 
 
 ## Description
-The application displays a custom logo. The user is prompted to pick a color, shape, and text then is presented a logo based on there selection.
-
+The application generates a logo based on user input. The program uses the inquirer package to prompt the user with questions about the logo design, such as the text, text color, shape color, and shape type. Based on the user's answers, the program creates an SVG file containing the logo.
 
 ## User Story
 AS a freelance web developer
@@ -40,7 +39,7 @@ This application takes the stress out of designing a logo, simply answer a few q
 TEXT FILLER, INSTRUCTIONS FOR ZACH'S LOGO GENERATOR GO HERE!!!!!!!!!!!!!!!!!!!!
 
 ## Technologies Used
-JavaScript, Node Js
+JavaScript, Node Js, Jest, Inquirer
 
 ## website
 Check out more of my work at https://github.com/ZachITP

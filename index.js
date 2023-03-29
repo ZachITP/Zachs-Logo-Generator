@@ -1,54 +1,55 @@
-const fs = require('./node_modules/graceful-fs/graceful-fs')
+//required packages and objects.js link
 const inquirer = require('inquirer');
-const {Circle, Square, Triangle} = require("./lib/shapes");
+const {Circle, Square, Triangle} = require("./Assets/objects.js");
 
-
+//render object and color for the logo
 class Svg{
   constructor(){
       this.textElement = ''
-      this.shapeElement = ''
+      this.objectElement = ''
   }
   render(){
-
-      return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.shapeElement}${this.textElement}</svg>`
+//object properties
+      return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.objectElement}${this.textElement}</svg>`
   }
+  //text and color properties
   loadTextElement(text,color){
       this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
   }
-  loadShapeElement(shape){
-      this.shapeElement = shape.render()
+  loadobjectElement(object){
+      this.objectElement = object.render()
 
   }
   
 }
-
+//asks the user what they want in their logo
 const questions= [
 
 {
-  type: "input",
-  name: "text",
-  message: "Please enter your logo text (3 characters only)"
-},
-{
-  type: "input",
-  name: "textColor",
-  messsage: "Please enter a color keyword or hexa decimal number for your text's color"
-},
-{
-type: 'list',
-name: 'logoshape',
-message: "Please select logo shape (press enter when you have made your selection)",
-choices: ['triangle', 'square', 'circle'],
-},
-{
-  type: "input",
-  name: "logocolor",
-  message: "Please select a color for your logo or enter a hyxadecimal number",
-},
+        type: "input",
+        name: "text",
+        message: "TEXT: Enter (3) Characters only:",
+    },
+    {
+        type: "input",
+        name: "text-color",
+        message: "TEXT COLOR: Enter a color keyword (OR a hexadecimal number):",
+    },
+    {
+        type: "input",
+        name: "object",
+        message: "object COLOR: Enter a color keyword (OR a hexadecimal number):",
+    },
+    {
+        type: "list",
+        name: "object-type",
+        message: "Choose which object type you would like to use?",
+        choices: ["Circle", "Square", "Triangle"],
+    },
 ];
 
 //function takes data and writes it to newly created SVG
-function writedata (fileName, data) {
+function writeTodata (fileName, data) {
   console.log("Writing [" + data + "] to file [" + fileName + "]")
   fileSystem.writedata(fileName, data, function (err) {
     if (err) {
@@ -60,148 +61,66 @@ function writedata (fileName, data) {
 
 
 async function start() {
-  console.log("run function");
-  var svgString = "";
-  var svg_file = "logo.svg";
+  console.log("Starting init");
+var svgString = "";
+var svg_file = "logo.svg";
 
-// ask the user for answers
-  const answers = await inquirer.createPromptModule(questions);
+  // Prompt the user for answers
+  const answers = await inquirer.prompt(questions);
 
-  var user_text = "";
-  if (answers.text.length > 0 && answers.text.length < 4) {
-    // 3 charecters only
-    user_text = answers.text;
-  } else {
-    // 4 and above charecters = invalid entry
-    console.log("invalid answer, only 1-3 charecters allowed ");
-    return;
-  }
+//user text
+var user_text = "";
+if (answers.text.length > 0 && answers.text.length < 4) {
+  // 1-3 chars, valid entry
+  user_text = answers.text;
+} else {
+  // 0 or 4+ chars, invalid entry
+  console.log("Invalid user text field detected! Please enter 1-3 Characters, no more and no less");
+      return;
+}
+console.log("User text: [" + user_text + "]");
+//user font color
+user_font_color = answers["text-color"];
+console.log("User font color: [" + user_font_color + "]");
+//user object color
+user_object_color = answers.object;
+console.log("User object color: [" + user_object_color + "]");
+//user object type
+user_object_type = answers["object-type"];
+console.log("User entered object = [" + user_object_type + "]");
 
-  console.log("logo text: [" + user_text + "]");
-	//user font color
-	user_font_color = answers["text-color"];
-	console.log("font color: [" + user_font_color + "]");
-	//user shape color
-	input_shape_color = answers.shape;
-	console.log("shape color: [" + input_shape_color + "]");
-	//user shape type
-	input_shape_type = answers["pixel-image"];
-	console.log("shape type = [" + input_shape_type + "]");
-	
-	//input shape type
-	let input_shape;
- 
-  //circle
-	if (input_shape_type === "Circle" || input_shape_type === "Circle") {
-		input_shape = new Circle();
-		console.log("You selected a Circle");
-	}
-  //triangle
-	else if (input_shape_type === "Triangle" || input_shape_type === "Triangle") {
-		input_shape = new Triangle();
-		console.log("You selected a Triangle");
-	}
-   //square 
-	else if (input_shape_type === "Square" || input_shape_type === "Square") {
-		input_shape = new Square();
-		console.log("You selected a square");
-	}
-  //if shape type not listed send them a message
-	else {
-		console.log("That is not a listed shape type, please try again or return to kindergarten");
-	}
-	input_shape.setColor(input_shape_color);
+//user object
+let user_object;
+if (user_object_type === "Circle" || user_object_type === "circle") {
+  user_object = new Circle();
+  console.log("User selected Circle object");
+}
+else if (user_object_type === "Square" || user_object_type === "square") {
+  user_object = new Square();
+  console.log("User selected Square object");
+}
 
-	// Create a new Svg and add shape and text selection to it
-	var svg = new Svg();
-	svg.loadTextElement(user_text, user_font_color);
-	svg.loadShapeElement(input_shape);
-	svgString = svg.render();
-	
-	//Print finalized shape to log
-	console.log("Displaying shape:\n\n" + svgString);
-	//document.getElementById("svg_image").innerHTML = svgString;
+else if (user_object_type === "Triangle" || user_object_type === "triangle") {
+  user_object = new Triangle();
+  console.log("User selected Triangle object");
+}
+else {
+  console.log("Invalid object!");
+}
+user_object.setColor(user_object_color);
 
-	console.log("Logo generation complete!");
-	console.log("Saving shape to file...");
-	writeToFile(svg_file, svgString); 
+// Create a new Svg instance and add the object and text elements to it
+var svg = new Svg();
+svg.SetTextElement(user_text, user_font_color);
+svg.SetobjectElement(user_object);
+svgString = svg.render();
+
+//Print object to log
+console.log("Displaying object:\n\n" + svgString);
+//document.getElementById("svg_image").innerHTML = svgString;
+
+console.log("object generation complete!");
+console.log("Writing object to file...");
+writeTodata(svg_file, svgString); 
 }
 start()
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Example dog object made from scratch. Writning 100 of these from scratch would take a long time.
-// const dog = {
-//   name: 'Rex',
-//   age: 2,
-//   breed: 'Bulldog'
-
-
-// Constructor function can be used to create objects containing properties "name", "age", "breed", and the "nap()" function
-function Dog(name, age, breed) {
-    this.name = name;
-    this.age = age;
-    this.breed = breed;
-    this.nap = function () {
-      console.log('Zzzzzzzzz');
-    };
-  }
-  
-  // Sets the variable "dog" to a Dog object and initializes with name, age, and breed properties
-  const dog = new Dog('Rex', 2, 'Bulldog');
-  
-  // Calling dog's nap method
-  dog.nap();
-    
