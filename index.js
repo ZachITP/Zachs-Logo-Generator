@@ -1,4 +1,5 @@
 //required packages and objects.js link
+const fileSystem = require ("fs");
 const inquirer = require('inquirer');
 const {Circle, Square, Triangle} = require("./Assets/objects.js");
 
@@ -17,7 +18,7 @@ class Svg{
       this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
   }
   loadobjectElement(object){
-      this.objectElement = object.render()
+      this.objectElement = object.create()
 
   }
   
@@ -28,22 +29,22 @@ const questions= [
 {
         type: "input",
         name: "text",
-        message: "TEXT: Enter (3) Characters only:",
+        message: "TEXT: Choose three characters to use in your logo:",
     },
     {
         type: "input",
         name: "text-color",
-        message: "TEXT COLOR: Enter a color keyword (OR a hexadecimal number):",
+        message: "TEXT COLOR: Choose a text color (OR a hexadecimal number):",
     },
     {
         type: "input",
         name: "object",
-        message: "object COLOR: Enter a color keyword (OR a hexadecimal number):",
+        message: "SHAPE COLOR: choose a color for the shape (OR a hexadecimal number):",
     },
     {
         type: "list",
         name: "object-type",
-        message: "Choose which object type you would like to use?",
+        message: "SHAPE TYPE: Make a selection from the list of shapes",
         choices: ["Circle", "Square", "Triangle"],
     },
 ];
@@ -51,7 +52,7 @@ const questions= [
 //function takes data and writes it to newly created SVG
 function writeTodata (fileName, data) {
   console.log("Writing [" + data + "] to file [" + fileName + "]")
-  fileSystem.writedata(fileName, data, function (err) {
+  fileSystem.writeFile(fileName, data, function (err) {
     if (err) {
       return console.log (err);
     }
@@ -61,7 +62,7 @@ function writeTodata (fileName, data) {
 
 
 async function start() {
-  console.log("Starting init");
+  console.log("Starting function");
 var svgString = "";
 var svg_file = "logo.svg";
 
@@ -111,8 +112,8 @@ user_object.setColor(user_object_color);
 
 // Create a new Svg instance and add the object and text elements to it
 var svg = new Svg();
-svg.SetTextElement(user_text, user_font_color);
-svg.SetobjectElement(user_object);
+svg.loadTextElement(user_text, user_font_color);
+svg.loadobjectElement(user_object);
 svgString = svg.render();
 
 //Print object to log

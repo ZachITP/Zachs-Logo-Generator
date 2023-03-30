@@ -24,7 +24,9 @@ describe('Circle', () => {
         const object = new Triangle();
         var color =('blue')
         object.setColor(color);
-        result(object.render()).toEqual(`<polygon height="100%" width="100%" points="0,200 300,200 150,0" fill="${color}">`);
+        result(object.render()).toEqual(`<polygon points="150, 18 244, 182 56, 182" fill="${color}">`);
       });
     });
+    
+
     
