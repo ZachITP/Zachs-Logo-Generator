@@ -30,10 +30,12 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
 #### Purpose
 This application takes the stress out of designing a logo, simply answer a few questions about styling and color and the app takes care of the rest.
+
+<img src="./Assets/rendering.png" alt="Code example" title="code">
 <img src="./Assets/Circle.png" alt="Circle example" title="Circle">
 <img src="./Assets/Square.png" alt="Square example" title="Square">
 <img src="./Assets/Triangle.png" alt="Triangle example" title="Triangle">
-<img src="./Assets/rendering.png" alt="Code example" title="code">
+
 
 ## Usage
 
