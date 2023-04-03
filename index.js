@@ -56,7 +56,7 @@ function writeTodata (fileName, data) {
     if (err) {
       return console.log (err);
     }
-    console.log("whoohoo!! you just created your logo!");
+    console.log("whoohoo!! you just created your logo, check for 'Logo.svg' in the file explorer");
   });
 }
 

@@ -1,3 +1,11 @@
+# identifies what files Git should ignore
+.DS_Store
+.node_modules
+
+
+
+
+
 # Logs
 logs
 *.log

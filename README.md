@@ -28,18 +28,18 @@ AND the output text "Generated logo.svg" is printed in the command line
 WHEN I open the `logo.svg` file in a browser
 THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
-#### Purpose
+## Purpose
 This application takes the stress out of designing a logo, simply answer a few questions about styling and color and the app takes care of the rest.
 
 <img src="./Assets/rendering.png" alt="Code example" title="code">
 <img src="./Assets/Circle.png" alt="Circle example" title="Circle">
 <img src="./Assets/Square.png" alt="Square example" title="Square">
 <img src="./Assets/Triangle.png" alt="Triangle example" title="Triangle">
+<img src="./Assets/jest_test.png" alt="jest test" title="jest test">
 
+## Video Walkthrough
 
-## Usage
-
-TEXT FILLER, INSTRUCTIONS FOR ZACH'S LOGO GENERATOR GO HERE!!!!!!!!!!!!!!!!!!!!
+<img src="./Assets/Logo_Generator.gif" alt= "walkthrough" title="walkthrough">
 
 ## Technologies Used
 JavaScript, Node Js, Jest, Inquirer
