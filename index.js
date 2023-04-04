@@ -29,22 +29,22 @@ const questions= [
 {
         type: "input",
         name: "text",
-        message: "TEXT: Choose three characters to use in your logo:",
+        message: "Choose 3 characters for your logo:",
     },
     {
         type: "input",
         name: "text-color",
-        message: "TEXT COLOR: Choose a text color (OR a hexadecimal number):",
+        message: "Enter a text color (OR a hexadecimal number):",
     },
     {
         type: "input",
         name: "object",
-        message: "SHAPE COLOR: choose a color for the shape (OR a hexadecimal number):",
+        message: "Enter a shape color (OR a hexadecimal number):",
     },
     {
         type: "list",
         name: "object-type",
-        message: "SHAPE TYPE: Make a selection from the list of shapes",
+        message: "Enter a shape type",
         choices: ["Circle", "Square", "Triangle"],
     },
 ];
